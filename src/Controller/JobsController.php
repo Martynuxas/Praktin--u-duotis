@@ -62,7 +62,7 @@ class JobsController extends AbstractController
             
         $this->addFlash('notification','Deleted successfully!');
 
-        return $this->redirectToRoute('donejobs');
+        return $this->redirectToRoute('doneJobs');
 
     }
 
