@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Praktinė užduotis{% endblock %}
+{% block body %}
+<div class="container">
+    {% for message in app.flashes('notification') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Job code</th>
+            <th scope="col">Name</th>
+            <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for job in jobs %}
+            <tr>
+            <th scope="row">{{ job.id }}</th>
+            <td>{{ job.jobcode }}</td>
+            <td>{{ job.name }}</td>
+            <td>
+                <a class="btn btn-warning" href="{{ path('updateJob', {'id': job.id }) }}">Update</a>
+                <a class="btn btn-danger" href="{{ path('deleteJob', {'id': job.id }) }}">Delete</a>
+            </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        <a class="btn btn-success" href="{{ path('createJob') }}">Create</a>
+</div>
+<div class="container">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Road number</th>
+            <th scope="col">Name</th>
+            <th scope="col">Section start</th>
+            <th scope="col">Section end</th>
+            <th scope="col">Road level</th>
+            <th scope="col">Road type</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for road in roads %}
+            <tr>
+            <th scope="row">{{ road.id }}</th>
+            <td>{{ road.roadnumber }}</td>
+            <td>{{ road.roadname }}</td>
+            <td>{{ road.sectionstart }}</td>
+            <td>{{ road.sectionend }}</td>
+            <td>{{ road.roadlevel }}</td>
+            <td>{{ road.roadtype }}</td>
+            <td>
+                <a class="btn btn-warning" href="{{ path('updateRoad', {'id': road.id }) }}">Update</a>
+                <a class="btn btn-danger" href="{{ path('deleteRoad', {'id': road.id }) }}">Delete</a>
+            </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        <a class="btn btn-success" href="{{ path('createRoad') }}">Create</a>
+</div>
+<div class="container">
+    <table class="table">
+        <thead >
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Cipher</th>
+            <th scope="col">Job</th>
+            <th scope="col">Road</th>
+            <th scope="col">Start</th>
+            <th scope="col">End</th>
+            <th scope="col">Units</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for doneJob in doneJobs %}
+            <tr>
+            <th scope="row">{{ doneJob.id }}</th>
+            <td>{{ doneJob.Cipher.JobCode }}</td>
+            <td>{{ doneJob.Cipher.name }}</td>
+            <td>{{ doneJob.Road.RoadNumber }} {{ doneJob.Road.RoadName }}</td>
+            <td>{{ doneJob.Road.SectionStart }}</td>
+            <td>{{ doneJob.Road.SectionEnd }}</td>
+            <td>KM</td>
+            <td>{{ doneJob.Quantity }}</td>
+            <td>
+                <a class="btn btn-warning" href="{{ path('updateDoneJob', {'id': doneJob.id }) }}">Update</a>
+                <a class="btn btn-danger" href="{{ path('deleteDoneJob', {'id': doneJob.id }) }}">Delete</a>
+            </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-success" href="{{ path('createDoneJob') }}">Create</a>
+</div>
+{% endblock %}

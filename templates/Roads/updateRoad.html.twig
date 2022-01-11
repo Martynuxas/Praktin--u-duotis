@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h3 class="mt-5 mb-5">Update Form</h3>
+        <div class="col-md-6 offset-md-3">
+            {{ form_start(form)}}
+                <div class="form-group">
+                    {{ form_label(form.Road_Number) }}
+                    {{ form_widget(form.Road_Number,{'attr':{'class':'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.Road_Name) }}
+                    {{ form_widget(form.Road_Name,{'attr':{'class':'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.Section_Start) }}
+                    {{ form_widget(form.Section_Start,{'attr':{'class':'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.Section_End) }}
+                    {{ form_widget(form.Section_End,{'attr':{'class':'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.Road_Level) }}
+                    {{ form_widget(form.Road_Level,{'attr':{'class':'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.Road_Type) }}
+                    {{ form_widget(form.Road_Type,{'attr':{'class':'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-info mt-2 text-white">Update</button>
+                </div>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+</div>
+{% endblock %}
