@@ -34,18 +34,18 @@ class DoneJobsController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $em = $this->getDoctrine()->getManager();
-            $roadNumber = $form->get('Road')->getData()->getRoadNumber();
-            $selectedStart = $form->get('SectionStart')->getData()->getSectionStart();
-            $selectedEnd = $form->get('SectionEnd')->getData()->getSectionEnd();
-            $roadByNumber = $em->getRepository(Roads::class)->findByRoadNumberStartAndEnd($roadNumber, $selectedStart, $selectedEnd);
-            $allRoadLength = $selectedEnd-$selectedStart;
+            $roadNumber = $form->get('Road')->getData()->getRoadNumber();//Get entered road number
+            $selectedStart = $form->get('SectionStart')->getData()->getSectionStart();//Get entered road section start
+            $selectedEnd = $form->get('SectionEnd')->getData()->getSectionEnd();//Get entered road section end
+            $roadByNumber = $em->getRepository(Roads::class)->findByRoadNumberStartAndEnd($roadNumber, $selectedStart, $selectedEnd);//Get ROADS that has that roadNumber, is in section start and end interval.
+            $allRoadLength = $selectedEnd-$selectedStart;//Get road distance
 
-            $size = count($roadByNumber);
-            $selectedQuantity = $form->get('Quantity')->getData();
+            $size = count($roadByNumber);//Get number of suitable roads
+            $selectedQuantity = $form->get('Quantity')->getData();//Get entered quantity
 
             foreach ($roadByNumber as $road) {
-                $thisRoadLength = $road->getSectionEnd() - $road->getSectionStart();
-                $thisRoadPercentQuantity = ($thisRoadLength/$allRoadLength) * $selectedQuantity;
+                $thisRoadLength = $road->getSectionEnd() - $road->getSectionStart();//Get this road distance
+                $thisRoadPercentQuantity = ($thisRoadLength/$allRoadLength) * $selectedQuantity;//Get this road job quantity by percent
                 $doneJob = new JobsDone();
                 $doneJob->setCipher($form->get('Cipher')->getData());
                 $doneJob->setRoad($road);

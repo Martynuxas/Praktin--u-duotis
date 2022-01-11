@@ -18,7 +18,19 @@ class RoadsRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Roads::class);
     }
-
+    public function findByRoadNumberStartAndEnd($roadNumber, $start, $end)
+    {
+        return $this->createQueryBuilder('Roads')
+        ->andWhere('Roads.Section_Start >= :start')
+        ->andWhere('Roads.Section_End <= :end')
+        ->andWhere('Roads.Road_Number = :roadNumber')
+        ->setParameter('start', $start)
+        ->setParameter('end', $end)
+        ->setParameter('roadNumber', $roadNumber)
+        ->getQuery()
+        ->getResult()
+        ;
+    }
     // /**
     //  * @return Roads[] Returns an array of Roads objects
     //  */
@@ -47,17 +59,5 @@ class RoadsRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function findByRoadNumberStartAndEnd($roadNumber, $start, $end)
-    {
-        return $this->createQueryBuilder('Roads')
-        ->andWhere('Roads.Section_Start >= :start')
-        ->andWhere('Roads.Section_End <= :end')
-        ->andWhere('Roads.Road_Number = :roadNumber')
-        ->setParameter('start', $start)
-        ->setParameter('end', $end)
-        ->setParameter('roadNumber', $roadNumber)
-        ->getQuery()
-        ->getResult()
-        ;
-    }
+    
 }
